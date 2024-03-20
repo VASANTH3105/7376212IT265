@@ -2,7 +2,7 @@
 
 const express = require('express');
 const axios = require('axios'); 
-const _ = require('lodash'); 
+const lodash = require('lodash'); 
 
 const app = express();
 const windowSize = 10; 
@@ -12,7 +12,7 @@ let storedNumbers = [];
 
 const isValidId = (id) => ['p', 'f', 'e', 'r'].includes(id);
 
-const calculateAverage = (numbers) => _.mean(numbers) || 0; 
+const calculateAverage = (numbers) => lodash.mean(numbers) || 0; 
 
 
 app.get('/numbers/:numberid', async (req, res) => {
@@ -26,17 +26,17 @@ app.get('/numbers/:numberid', async (req, res) => {
     const response = await axios.get(`http://20.244.56.144/numbers/${numberid}`, { timeout }); 
 
     const fetchedNumber = response.data;
-
+    //not in case of success or timeout form API provided by affordmed
     if (response.status !== 200 || response.elapsedTime > timeout) {
       return res.json({ windowPrevState: storedNumbers, windowCurrState: storedNumbers, numbers: [], avg: calculateAverage(storedNumbers) });
     }
 
-    const uniqueNumber = _.uniq([...storedNumbers, fetchedNumber]).slice(-windowSize);
+    const uniqueNumber = lodash.uniq([...storedNumbers, fetchedNumber]).slice(-windowSize);
 
     storedNumbers = uniqueNumber;
 
-    const windowPrevState = storedNumbers.slice(0, -1); // Get previous window state
-    const windowCurrState = storedNumbers; // Get current window state
+    const windowPrevState = storedNumbers.slice(0, -1); 
+    const windowCurrState = storedNumbers; 
 
     res.json({
       windowPrevState,
