@@ -1,0 +1,39 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors'); // Import the cors package
+
+const app = express();
+app.use(bodyParser.json());
+app.use(cors());
+
+
+
+
+let gql = `
+query {
+    data {
+      
+    }
+  }  
+`
+
+app.get('/p', (req, res) => {
+  
+});
+
+app.get('/f', (req, res) => {
+  
+});
+
+app.get('/e', (req, res) => {
+  
+});
+
+app.get('/r', (req, res) => {
+  
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
