@@ -8,7 +8,7 @@ app.use(cors());
 const port = process.env.PORT || 3000;
 
 app.get('/', (req, res) => { 
-    res.send('Hello from your REST API!');
+    res.send('local server is ready state ');
 });
 
 app.listen(port, () => {
